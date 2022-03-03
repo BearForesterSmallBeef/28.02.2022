@@ -5,7 +5,7 @@ from forms.user import RegisterForm, LoginForm
 from forms.news import NewsForm
 from data.news import News
 from data.users import User
-from data import db_session
+from data import db_session, news_api
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -15,6 +15,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     db_session.global_init("db/blogs.db")
+    app.register_blueprint(news_api.blueprint)
     app.run(port=8080, host='127.0.0.1')
 
 
